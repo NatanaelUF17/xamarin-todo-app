@@ -4,6 +4,7 @@ using ToDo.ViewModels.Helpers;
 
 namespace ToDo.ViewModels
 {
+    // This viewmodel is for the todo item view
     public class TodoItemViewModel : ViewModel
     {
         public TodoItem Todo { get; private set; }
