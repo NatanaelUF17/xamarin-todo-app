@@ -5,11 +5,11 @@ using ToDo.ViewModels.Helpers;
 namespace ToDo.ViewModels
 {
     // This viewmodel is for the todos list view
-    public class ItemsViewModel : ViewModel
+    public class ItemViewModel : ViewModel
     {
         private readonly TodoItemRepository _todoItemRepository;
 
-        public ItemsViewModel(TodoItemRepository todoItemRepository)
+        public ItemViewModel(TodoItemRepository todoItemRepository)
         {
             _todoItemRepository = todoItemRepository;
         }

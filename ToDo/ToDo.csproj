@@ -15,6 +15,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+    <PackageReference Include="Autofac" Version="6.3.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -24,6 +25,7 @@
     <None Remove="sqlite-net-pcl" />
     <None Remove="PropertyChanged.Fody" />
     <None Remove="ViewModels\Helpers\" />
+    <None Remove="Autofac" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
