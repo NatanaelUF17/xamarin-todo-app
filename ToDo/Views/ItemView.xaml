@@ -6,16 +6,16 @@
     Title="New To Do">
        
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" />
+        <ToolbarItem Text="Save" Command="{Binding SaveTodo}"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="14">
         <Label Text="Title" />
-        <Entry />
+        <Entry Text="{Binding Todo.Title}"/>
         <Label Text="Due" />
-        <DatePicker />
+        <DatePicker Date="{Binding Todo.Due}"/>
         <StackLayout Orientation="Horizontal">
-            <Switch />
+            <Switch IsToggled="{Binding Todo.IsCompleted}"/>
             <Label Text="Completed"/>
         </StackLayout>
     </StackLayout>

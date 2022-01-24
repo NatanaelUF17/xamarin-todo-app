@@ -3,7 +3,7 @@ using Autofac;
 
 namespace ToDo
 {
-    public class Resolver
+    public static class Resolver
     {
         private static IContainer _container;
 

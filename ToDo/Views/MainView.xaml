@@ -2,12 +2,19 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:ToDo.Converters"
     xmlns:local="clr-namespace:ToDo"
     x:Class="ToDo.Views.MainView"
     Title="To Do!">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StatusColorConverter x:Key="statusColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" />
+        <ToolbarItem Text="Add" Command="{Binding AddTodo}" />
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -16,9 +23,60 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Text="Toggle filter" />
+        <Button Style="{StaticResource FilterButton}"
+                BackgroundColor="{Binding ShowAll, Converter={StaticResource statusColorConverter}}"
+                TextColor="Black"
+                Text="{Binding FilterText, StringFormat='Filter: {0}'}"
+                Command="{Binding ToggleFilter}">
 
-        <ListView Grid.Row="1"></ListView>
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding ShowAll}" Value="True">
+                    <Setter Property="TextColor" Value="White"/>
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+
+        <ListView x:Name="TodosListView"
+                  Grid.Row="1" RowHeight="70"
+                  ItemsSource="{Binding Todos}"
+                  SelectedItem="{Binding SelectedTodo}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="{Binding StatusText}"
+                                      Command="{Binding ToogleCompleted}"/>
+                        </ViewCell.ContextActions>
+
+                        <Grid Padding="15,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView Grid.RowSpan="2"
+                                     BackgroundColor="{Binding Todo.IsCompleted, Converter={StaticResource statusColorConverter}}"/>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Todo.Due, StringFormat='0:MMMM d, yyyy'}"
+                                   FontSize="Micro" /> 
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Todo.Title}"
+                                   FontSize="Micro"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   HorizontalTextAlignment="End"
+                                   Text="Completed"
+                                   IsVisible="{Binding Todo.IsCompleted}"
+                                   FontSize="Micro"
+                                   TextColor="{StaticResource CompletedColor}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 
 </ContentPage>

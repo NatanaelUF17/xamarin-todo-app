@@ -24,7 +24,8 @@ namespace ToDo
             ContainerBuilder = new ContainerBuilder();
 
             foreach (var type in currentAssembly.DefinedTypes
-                .Where(t => t.IsSubclassOf(typeof(Page)) || t.IsSubclassOf(typeof(ViewModel))))
+                .Where(t => t.IsSubclassOf(typeof(Page))
+                || t.IsSubclassOf(typeof(ViewModel))))
             {
                 ContainerBuilder.RegisterType(type.AsType());
             }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows.Input;
 using ToDo.Models;
 using ToDo.ViewModels.Helpers;
+using Xamarin.Forms;
 
 namespace ToDo.ViewModels
 {
@@ -16,5 +18,11 @@ namespace ToDo.ViewModels
 
         public event EventHandler TodoStatusChanged;
         public string StatusText => Todo.IsCompleted ? "Reactivate" : "Completed";
+
+        public ICommand ToggleCompleted => new Command((arg) =>
+        {
+            Todo.IsCompleted = !Todo.IsCompleted;
+            TodoStatusChanged?.Invoke(this, new EventArgs());
+        });
     }
 }
