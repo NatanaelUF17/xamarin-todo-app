@@ -19,11 +19,11 @@ namespace ToDo.ViewModels
 
         public MainViewModel(TodoItemRepository todoItemRepository)
         {
-            _todoItemRepository.OnTodoAdded += (sender, todo) =>
-                Todos.Add(CreateTodoItemViewModel(todo));
+            todoItemRepository.OnTodoAdded += (sender, todo) =>
+               Todos.Add(CreateTodoItemViewModel(todo));
 
-            _todoItemRepository.OnTodoUpdated += (sender, todo) =>
-                Task.Run(async () => await LoadData());
+            todoItemRepository.OnTodoUpdated += (sender, todo) =>
+               Task.Run(async () => await LoadData());
 
             _todoItemRepository = todoItemRepository;
             Task.Run(async () => await LoadData());
